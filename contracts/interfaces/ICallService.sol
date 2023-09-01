@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-pragma solidity >=0.8.0;
+pragma solidity >=0.8.18;
 
 interface ICallService {
     /**
@@ -8,21 +8,6 @@ interface ICallService {
     function getBtpAddress(
     ) external view returns (
         string memory
-    );
-
-    /**
-       @notice Gets the fee for delivering a message to the _net.
-               If the sender is going to provide rollback data, the _rollback param should set as true.
-               The returned fee is the sum of the protocol fee and the relay fee.
-       @param _net (String) The destination network address
-       @param _rollback (Bool) Indicates whether it provides rollback data
-       @return (Integer) the sum of the protocol fee and the relay fee
-     */
-    function getFee(
-        string memory _net,
-        bool _rollback
-    ) external view returns (
-        uint256
     );
 
     /*======== At the source CALL_BSH ========*/
@@ -104,24 +89,20 @@ interface ICallService {
        @param _to A string representation of the callee address
        @param _sn The serial number of the request from the source
        @param _reqId The request id of the destination chain
-       @param _data The calldata
      */
     event CallMessage(
         string indexed _from,
         string indexed _to,
         uint256 indexed _sn,
-        uint256 _reqId,
-        bytes _data
+        uint256 _reqId
     );
 
     /**
        @notice Executes the requested call message.
        @param _reqId The request id
-       @param _data The calldata
      */
     function executeCall(
-        uint256 _reqId,
-        bytes memory _data
+        uint256 _reqId
     ) external;
 
     /**
