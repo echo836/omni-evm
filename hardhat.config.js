@@ -1,6 +1,9 @@
+require("@nomicfoundation/hardhat-verify");
+require('dotenv/config');
 require("@nomicfoundation/hardhat-toolbox");
-const PKTestnet = "08623578f563d63af15322ea2927666c467d302fd730e7727dc7d518ec074d1a"
-const PKLocal = '0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d'
+const PKTestnet = process.env.PKTestnet;
+const PKLocal = process.env.PKLocal
+const etherscanApiKey = process.env.ETHERSCAN_API_KEY;
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -12,6 +15,11 @@ module.exports = {
         runs: 200,
       },
     },
+  },
+  etherscan: {
+    apiKey: {
+      bscTestnet: etherscanApiKey
+    }  
   },
   networks: {
     hardhat: {

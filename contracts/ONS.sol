@@ -42,7 +42,7 @@ contract ONSProxy is ICallServiceReceiver, Initializable, Ownable, ERC721 {
     }
 
     constructor() ERC721("Omni Name Service", "OMNI") {
-        
+
     }
 
     /**
@@ -177,7 +177,9 @@ contract ONSProxy is ICallServiceReceiver, Initializable, Ownable, ERC721 {
         bytes memory _data = abi.encodePacked(
             "mint,", _name, ",", msg.sender, ",", _years
         );
-        bytes memory _rollback = ""; 
+        bytes memory _rollback = "";
+
+
         _sendXCallMessage(iconBtpAddress, _data, _rollback);
 
         address payable treasury = payable(owner()); 
@@ -229,6 +231,10 @@ contract ONSProxy is ICallServiceReceiver, Initializable, Ownable, ERC721 {
 
     function getCallService() public view returns (address) {
         return callSvc;
+    }
+
+    function getIconBtpAddress() public view returns (string memory) {
+        return iconBtpAddress;
     }
 
     function getXCallFee(
