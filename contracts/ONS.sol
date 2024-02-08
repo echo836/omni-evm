@@ -75,7 +75,6 @@ contract ONSProxy is ICallServiceReceiver, Initializable, Ownable, ERC721 {
         if (keccak256(abi.encodePacked(_base)) == keccak256(abi.encodePacked(_value))) {
             return true;
         }
-
         return false;
     }
 
